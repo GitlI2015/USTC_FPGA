@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=C:\Documents and Settings\admin\My Documents\Downloads\test\top.ncd
+OUTFILE=C:\Documents and Settings\admin\My Documents\Downloads\test\top.bit
+FAMILY=Spartan3E
+PART=xc3s500e-5fg320
+WORKINGDIR=C:\Documents and Settings\admin\My Documents\Downloads\test
+LICENSE=WebPack
+USER_INFO=15690819_173552794_661

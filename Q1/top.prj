@@ -1,0 +1,5 @@
+verilog work "div2.v"
+verilog work "../Q1/div.v"
+verilog work "../Q1/code.v"
+verilog work "../Q1/cnt.v"
+verilog work "../Q1/top.v"
