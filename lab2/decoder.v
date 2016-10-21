@@ -19,22 +19,16 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module decoder(
-input a,
-input b,
-input c,
+input [2:0] i,
 input mode,
 output reg [7:0] o
 );
-reg t;
-initial assign o = 8'b0000_0000;
-always@(a or b or c or mode)
+initial
+assign o = 8'b0000_0000;
+always@(i or mode)
 begin
 if(mode==1)
-	t <= a<<2+b<<1+c;
-else
-	t <= 8'b0000_0000;
-if(mode==1)
-case(t)
+case(i)
 0: o[7:0]=8'b0000_0001;
 1: o[7:0]=8'b0000_0010;
 2: o[7:0]=8'b0000_0100;
@@ -46,7 +40,6 @@ case(t)
 endcase
 else
 o[7:0]=8'b0000_0000;
-
 end
 
 endmodule

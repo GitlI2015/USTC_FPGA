@@ -21,14 +21,19 @@
 module top(
 input [4:0] in,
 output [7:0] LED,
-output [6:0] num
+output [7:0] num,
+output [3:0] sub
 );
+assign sub = 4'b0111; 
+
 decoder d(
-.a (in[2]),
-.b (in[1]),
-.c (in[0]),
+.i (in[2:0]),
 .mode (in[4]),
 .o (LED[7:0])
 );
-
+number n(
+.in (in[3:0]),
+.mode (in[4]),
+.out (num[7:0])
+);
 endmodule
