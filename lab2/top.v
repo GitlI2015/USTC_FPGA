@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    22:18:52 10/13/2016 
+// Create Date:    13:45:58 10/21/2016 
 // Design Name: 
-// Module Name:    t 
+// Module Name:    top 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,19 +18,17 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module testbench1();
-reg clock;
-reg data;
-initial 
-begin
-clock = 0;
-data = 0;
-end
-wire d1;
-wire d2;
-always #5 clock = ~ clock;
-always #10 data = ~ data;
-top U1(.D(data),.CP(clock),.Q(d1),.Q(d2));
+module top(
+input [4:0] in,
+output [7:0] LED,
+output [6:0] num
+);
+decoder d(
+.a (in[2]),
+.b (in[1]),
+.c (in[0]),
+.mode (in[4]),
+.o (LED[7:0])
+);
+
 endmodule
-
-
