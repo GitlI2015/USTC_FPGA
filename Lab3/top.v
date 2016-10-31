@@ -21,6 +21,7 @@
 module top(
 input clk,
 input rst_n,
+input pause_n,
 output [7:0] LED,
 output [7:0] digit,
 output [3:0] sel
@@ -31,11 +32,11 @@ wire [7:0] number;
 
 counter cter(
 .clk (clk),
-.rst_n (rst_n),
 .cnt_en (en)
 );
 
 adder ad(
+.pause (pause_n),
 .clk (clk),
 .rst_n (rst_n),
 .count (number)

@@ -19,18 +19,20 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module adder(
+input pause,
 input clk,
 input rst_n,
 output reg [7:0] count
 );
 
 reg [24:0] cnt_div;
-initial assign count = 8'h00;
+initial cnt_div = 25'b0;
+initial count = 8'h00;
 always@(posedge clk or posedge rst_n)
 begin
 	if(rst_n)
 		cnt_div <=25'h0;
-	else if (cnt_div == 25'd2499_9999)
+	else if (cnt_div == 25'd2499_9)
 		cnt_div <= 25'h0;
 	else
 		cnt_div <= cnt_div + 25'h1;
@@ -40,7 +42,7 @@ always@(posedge clk or posedge rst_n)
 begin 
 	if(rst_n)
 		count =8'h90;
-	else if(cnt_div==25'd2499_9999)
+	else if(cnt_div==25'd2499_9&&pause==0)
 	begin
 		if(count[3:0]==4'b1001)
 		begin

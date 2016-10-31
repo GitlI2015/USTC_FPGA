@@ -22,7 +22,7 @@ module led(
 input [7:0] in,
 output reg [7:0] out
 );
-initial assign out = 8'h00;
+initial out = 8'h00;
 always@(in)
 	out[7:0]<=in[7:4]*10+in[3:0];
 

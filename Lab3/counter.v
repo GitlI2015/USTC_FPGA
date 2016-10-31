@@ -20,26 +20,22 @@
 //////////////////////////////////////////////////////////////////////////////////
 module counter(
 input clk,
-input rst_n,
 output reg cnt_en
 );
-initial assign cnt_en = 0;
+initial cnt_en = 0;
 reg [24:0] cnt_div;
-always@(posedge clk or posedge rst_n)
+initial cnt_div = 25'b0;
+always@(posedge clk)
 begin
-	if(rst_n)
-		cnt_div <=25'h0;
-	else if (cnt_div == 25'd49_999)
+	if (cnt_div == 25'd49)
 		cnt_div <= 25'h0;
 	else
 		cnt_div <= cnt_div + 25'h1;
 end
 
-always@(posedge clk or posedge rst_n)
+always@(posedge clk)
 begin 
-	if(rst_n)
-		cnt_en <=2'b00;
-	else if(cnt_div==25'd49_999)
+	if(cnt_div==25'd49)
 	begin
 		if(cnt_en==1)
 			cnt_en <= 0;

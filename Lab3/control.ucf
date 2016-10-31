@@ -20,3 +20,4 @@ NET "sel[1]" LOC = "H17";
 NET "sel[2]" LOC = "C18";
 NET "sel[3]" LOC = "F15";
 NET "rst_n" LOC = "H13";
+NET "pause_n" LOC = "E18";
