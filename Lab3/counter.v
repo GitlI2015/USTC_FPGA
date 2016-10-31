@@ -27,7 +27,7 @@ reg [24:0] cnt_div;
 initial cnt_div = 25'b0;
 always@(posedge clk)
 begin
-	if (cnt_div == 25'd49)
+	if (cnt_div == 25'd2499_9999)
 		cnt_div <= 25'h0;
 	else
 		cnt_div <= cnt_div + 25'h1;
@@ -35,7 +35,7 @@ end
 
 always@(posedge clk)
 begin 
-	if(cnt_div==25'd49)
+	if(cnt_div==25'd2499_9999)
 	begin
 		if(cnt_en==1)
 			cnt_en <= 0;
