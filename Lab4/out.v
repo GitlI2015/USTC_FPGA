@@ -19,16 +19,32 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module out(
-input curr_state,
-input next_state,
-input clk,
-output reg o
+input [1:0] en,
+input [3:0] num,
+output reg [3:0] sel,
+output reg [7:0] lout
 );
 
-always@(posedge clk or negedge rst_n)
+always@(*)
 begin
-	if(~rst_n)
-		a <= 
+case(en)
+	2'b00: sel <= 4'b1110;
+	2'b01: sel <= 4'b1101;
+	2'b10: sel <= 4'b1011;
+	2'b11: sel <= 4'b0111;
+endcase
 end
+
+always@(*)
+begin
+case(num[en])
+	0: lout <= 8'b0000_0011;
+	1: lout <= 8'b1001_1111;
+	default: lout <= 8'b1111_1111;
+endcase
+end
+
+
+
 
 endmodule
