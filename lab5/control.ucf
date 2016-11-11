@@ -1,4 +1,3 @@
-NET "led" LOC = "J14";
 
 NET "digit[7]" LOC = "L18";
 NET "digit[6]" LOC = "F18";
@@ -14,10 +13,16 @@ NET "sel[0]" LOC = "F17";
 NET "sel[1]" LOC = "H17";
 NET "sel[2]" LOC = "C18";
 NET "sel[3]" LOC = "F15";
-NET "rst_n" LOC = "H18";
+NET "rst_n" LOC = "H13";
 
-NET "button" LOC = "H13";
-NET "op" LOC = "G18";
+NET "in[3]" LOC = "R17";
+NET "in[2]" LOC = "N17";
+NET "in[1]" LOC = "L13";
+NET "in[0]" LOC = "L14";
+NET "in_addr[1]" LOC = "K17";
+NET "in_addr[0]" LOC = "K18";
+NET "re_addr[1]" LOC = "H18";
+NET "re_addr[0]" LOC = "G18";
 #Created by Constraints Editor (xc3s500e-fg320-5) - 2016/11/04
 NET "clk" TNM_NET = clk;
 TIMESPEC TS_clk = PERIOD "clk" 20 ns HIGH 50%;

@@ -26,15 +26,14 @@ input rst_n,
 input clk,
 input [1:0] in_addr,
 input [1:0] re_addr,
-output reg [7:0] led,
-output reg [3:0] sel
+output [7:0] digit,
+output  [3:0] sel
 );
 
 wire [3:0] w;
-wire [3:0] s;
 counter c(
 .clk (clk),
-.cnt_en (s)
+.cnt_en (sel)
 );
 
 re r(
@@ -49,9 +48,6 @@ re r(
 
 led l(
 .data (w),
-.sel (s),
-.out (led)
+.out (digit)
 );
-always@(*)
-	sel <= s;
 endmodule

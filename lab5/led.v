@@ -20,8 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module led(
 input [3:0] data,
-input [3:0] sel,
-output [7:0] out
+output reg [7:0] out
 );
 always@(*)
 case(data[3:0])
