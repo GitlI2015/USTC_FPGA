@@ -1,18 +1,10 @@
 
-NET "digit[7]" LOC = "L18";
-NET "digit[6]" LOC = "F18";
-NET "digit[5]" LOC = "D17";
-NET "digit[4]" LOC = "D16";
-NET "digit[3]" LOC = "G14";
-NET "digit[2]" LOC = "J17";
-NET "digit[1]" LOC = "H14";
-NET "digit[0]" LOC = "C17";
+NET "digit[3]" LOC = "K14";
+NET "digit[2]" LOC = "K15";
+NET "digit[1]" LOC = "J15";
+NET "digit[0]" LOC = "J14";
 
 NET "clk" LOC = "B8";
-NET "sel[0]" LOC = "F17";
-NET "sel[1]" LOC = "H17";
-NET "sel[2]" LOC = "C18";
-NET "sel[3]" LOC = "F15";
 NET "rst_n" LOC = "H13";
 
 NET "in[3]" LOC = "R17";
@@ -23,6 +15,7 @@ NET "in_addr[1]" LOC = "K17";
 NET "in_addr[0]" LOC = "K18";
 NET "re_addr[1]" LOC = "H18";
 NET "re_addr[0]" LOC = "G18";
+NET "en" LOC = "E18";
 #Created by Constraints Editor (xc3s500e-fg320-5) - 2016/11/04
 NET "clk" TNM_NET = clk;
 TIMESPEC TS_clk = PERIOD "clk" 20 ns HIGH 50%;
