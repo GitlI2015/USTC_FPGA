@@ -28,7 +28,7 @@ output reg [19:0] disp
 wire b1,b2,b3,b4;
 wire s1,s2,s3,s4,s5,s6,s7,s8;
 wire [2:0] curr;
-wire [19:0] num,hello_out,edit_out;
+wire [19:0] num,hello_out,edit_out,help_out;
 wire p;
 
 reg [3:0] state;
@@ -67,19 +67,26 @@ showedit s(
 .curr (curr),
 .dout (edit_out)
 );
-
+help hp(
+.clk (clk),
+.state (state),
+.out (help_out)
+);
 hello h(
 .clk (clk),
 .data (hello_out)
 );
 twinkle8 t(
 .clk (clk),
-.en (state==0),
-.o (led)
+.state (state),
+.out (led)
 );
+
 always @(*)
 if(state == 0)
 	disp = hello_out;
+else if(state==6||state>7)
+	disp = help_out;
 else
 	disp = edit_out;
 
@@ -90,20 +97,56 @@ else
 	begin
 		case(state)
 		4'd0:
-			begin
-			if(b1|b2|b3|b4|s1|s2|s3|s4|s5|s6|s7)
+			if(b1|b2|b3|b4|s1|s2|s3|s4|s5)
 				state<=1;
-			end
-		4'd1:
-			state<=state;
-//			if(s2)
-//			begin
-//				state<=2;
-//			end
-//		4'd2:
-//			begin
-//				state<=2;
-//			end
+			else if(s6)
+				state<=6;
+			else if(s7)
+				state<=7;
+			else
+				state<=0;
+		4'd6,4'd8,4'd9,4'd10,4'd11,4'd12,4'd13:
+			if(s7&&~s6)
+				state<=7;
+			else if(s1&&~s6)
+				state<=1;
+			else if(s2&&~s6)
+				state<=2;
+			else if(s3&&~s6)
+				state<=3;
+			else if(s4&&~s6)
+				state<=4;
+			else if(s5&&~s6)
+				state<=5;
+			else if(s6&&s1)
+				state<=8;
+			else if(s6&&s2)
+				state<=9;
+			else if(s6&&s3)
+				state<=10;
+			else if(s6&&s4)
+				state<=11;
+			else if(s6&&s5)
+				state<=12;
+			else if(s6&&s7)
+				state<=13;
+		default:
+			if(s7&&~s6)
+				state<=7;
+			else if(s1&&~s6)
+				state<=1;
+			else if(s2&&~s6)
+				state<=2;
+			else if(s3&&~s6)
+				state<=3;
+			else if(s4&&~s6)
+				state<=4;
+			else if(s5&&~s6)
+				state<=5;
+			else if(s6)
+				state<=6;
+			else
+				state<=state;
 		endcase
 	end
 initial 

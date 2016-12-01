@@ -74,10 +74,11 @@ begin
 end
 
 always@(posedge clk or posedge rst)
-begin
 	if(rst)
 		num<=0;
 	else if(inc)
+	begin
+	if(state==1|state==2|state==3|state==4|state==5)
 		case(curr)
 			0:num[3:0]<=num[3:0]<9?num[3:0]+1:0;
 			1:num[7:4]<=num[7:4]<9?num[7:4]+1:0;
@@ -85,7 +86,12 @@ begin
 			3:num[15:12]<=num[15:12]<9?num[15:12]+1:0;
 			4:num[19:16] <= num[19:16]==5?4'd0:4'd5;
 		endcase
+	else
+		num<=num;
+	end
 	else if(dec)
+	begin
+	if(state==1|state==2|state==3|state==4|state==5)
 		case(curr)
 			0:num[3:0]<=num[3:0]>0?num[3:0]-1:9;
 			1:num[7:4]<=num[7:4]>0?num[7:4]-1:9;
@@ -93,20 +99,21 @@ begin
 			3:num[15:12]<=num[15:12]>0?num[15:12]-1:9;
 			4:num[19:16] <= num[19:16]==5?4'd0:4'd5;
 		endcase
-end
-
+	else
+		num<=num;
+	end
 
 always@(*)
-//if(state==2)
+if(state==7)
+	nout<=test_n;
+else
 	nout<=num;
-//else
-//	nout<=num;
 
-//n2bcd test(
-//.n (16'd1234),
-//.clk (clk),
-//.bcd (test_n)
-//);
+n2bcd test(
+.n (-16'sd8888),
+.clk (clk),
+.bcd (test_n)
+);
 
 endmodule
 
