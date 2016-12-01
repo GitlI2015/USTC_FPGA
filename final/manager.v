@@ -105,6 +105,13 @@ else
 				state<=7;
 			else
 				state<=0;
+		4'd7:
+			if(b1|b2|b3|b4|s1|s2|s3|s4|s5)
+				state<=1;
+			else if(s6)
+				state<=6;
+			else 
+				state<=7;
 		4'd6,4'd8,4'd9,4'd10,4'd11,4'd12,4'd13:
 			if(s7&&~s6)
 				state<=7;
