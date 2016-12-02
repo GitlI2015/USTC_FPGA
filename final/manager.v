@@ -1,23 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    21:08:51 11/27/2016 
-// Design Name: 
-// Module Name:    manager 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
 module manager(
 input clk,
 input [7:0] switch,
@@ -29,8 +10,9 @@ wire b1,b2,b3,b4;
 wire s1,s2,s3,s4,s5,s6,s7,s8;
 wire [2:0] curr;
 wire [19:0] num,hello_out,edit_out,help_out;
-wire p;
-
+wire p,error;
+reg er;
+wire [19:0] error_out={5'd31,5'd14,5'd25,5'd25};
 reg [3:0] state;
 
 debounce_switch ds1(switch[0],clk,s1);
@@ -57,7 +39,8 @@ editor e(
 .state (state),
 .curr (curr),
 .nout (num), 
-.p (p)
+.p (p),
+.error (error)
 );
 
 showedit s(
@@ -85,6 +68,17 @@ twinkle8 t(
 always @(*)
 if(state == 0)
 	disp = hello_out;
+else if(error&&(state==1|state==2|state==3|state==4|state==5))
+	if(er==0)
+	begin
+		disp=error_out;
+		er=1;
+	end
+	else
+	if(s1)
+		er=0;
+	else
+		disp=disp;
 else if(state==6||state>7)
 	disp = help_out;
 else
@@ -140,7 +134,7 @@ else
 		default:
 			if(s7&&~s6)
 				state<=7;
-			else if(s1&&~s6)
+			else if(s1&&~s6&&~s2&&~s3&&~s4&&~s5)
 				state<=1;
 			else if(s2&&~s6)
 				state<=2;
@@ -152,6 +146,8 @@ else
 				state<=5;
 			else if(s6)
 				state<=6;
+			else if((~s2&&state==2)|(~s3&&state==3)|(~s4&&state==4)|(~s5&&state==5))
+				state<=1;
 			else
 				state<=state;
 		endcase
@@ -159,6 +155,7 @@ else
 initial 
 begin
 state=0;
+er=0;
 end
 
 endmodule

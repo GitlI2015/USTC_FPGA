@@ -57,7 +57,7 @@ output reg signed [15:0] n=0
 );
 always@(posedge clk)
 if(en)
-	n=(bcd[19:16]==5'd0)?(-bcd[15:12]*1000-bcd[11:8]*100-bcd[7:4]*10-bcd[3:0]):(bcd[15:12]*1000+bcd[11:8]*100+bcd[7:4]*10+bcd[3:0]);
+	n=(bcd[19:16]==4'd5)?(-bcd[15:12]*1000-bcd[11:8]*100-bcd[7:4]*10-bcd[3:0]):(bcd[15:12]*1000+bcd[11:8]*100+bcd[7:4]*10+bcd[3:0]);
 else
 	n=0;
 endmodule

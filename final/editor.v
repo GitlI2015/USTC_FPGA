@@ -1,23 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    14:37:11 11/27/2016 
-// Design Name: 
-// Module Name:    editor 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
+
 module editor(
 	input clk,
 	input rst,
@@ -28,19 +10,63 @@ module editor(
 	input [3:0] state,
 	output reg [2:0]curr=0,
 	output reg [19:0]nout=0,   //display on screen
-	output reg p
+	output reg p,
+	output reg error
 );
+reg as;
 reg [19:0] num;
-wire [19:0] test_n;
+reg [19:0] num_t,num_tt;
+wire signed [15:0] lo,ro,mult_re,div_re;
+reg signed [15:0] re;
+wire [19:0] test_n,re_bcd;
+wire r;
+wire signed [15:0] f;
+bcd2n lb(num,1,clk,lo);
+bcd2n rb(num_tt,1,clk,ro);
+n2bcd reb(re,clk,re_bcd);
+mult mr(clk,mult_re,lo,ro);
+div dr(r,clk,lo,div_re,ro,f);
+always@(posedge clk)
+	if(state==2)
+	begin
+		re<=lo+ro;
+		if((lo+ro>9999)|(lo+ro<-9999))
+			error<=1;
+		else
+			error<=0;
+	end
+	else if(state==3)
+	begin
+		if((lo-ro>9999)|(lo+ro<-9999))
+			error<=1;
+		else
+			error<=0;
+		re<=lo-ro;
+	end
+	else if(state==4)
+	begin
+		re<=mult_re;
+		if((lo*ro>9999)|(lo*ro)<-999)
+			error<=1;
+		else
+			error<=0;
+	end
+	else if(state==5)
+		re<=div_re;
+	else if(rst)
+		error<=0;
+	else	re<=re;
 initial
 begin
 p=0;
+error =0;
 end
+
 always@(posedge clk or posedge rst)
-begin
 	if(rst)
 	begin
 		curr<=0;
+		num<=0;
 		p<=0;
 	end
 	else if(left)
@@ -51,7 +77,7 @@ begin
 			curr<=0;
 		end
 		else
-		begin 
+		begin
 			if(curr-p==3)
 				p<=p+1;
 			curr<=curr+1;
@@ -71,43 +97,83 @@ begin
 			curr<=curr-1;
 		end
 	end
-end
-
-always@(posedge clk or posedge rst)
-	if(rst)
-		num<=0;
 	else if(inc)
 	begin
-	if(state==1|state==2|state==3|state==4|state==5)
-		case(curr)
-			0:num[3:0]<=num[3:0]<9?num[3:0]+1:0;
-			1:num[7:4]<=num[7:4]<9?num[7:4]+1:0;
-			2:num[11:8]<=num[11:8]<9?num[11:8]+1:0;
-			3:num[15:12]<=num[15:12]<9?num[15:12]+1:0;
-			4:num[19:16] <= num[19:16]==5?4'd0:4'd5;
-		endcase
-	else
-		num<=num;
+		if(state==1)
+		begin
+			num_t<=0;
+			case(curr)
+				0:num[3:0]<=num[3:0]<9?num[3:0]+1:0;
+				1:num[7:4]<=num[7:4]<9?num[7:4]+1:0;
+				2:num[11:8]<=num[11:8]<9?num[11:8]+1:0;
+				3:num[15:12]<=num[15:12]<9?num[15:12]+1:0;
+				4:num[19:16] <= num[19:16]==5?4'd0:4'd5;
+			endcase
+		end
+		else if(state==2|state==3|state==4|state==5)
+			begin
+			case(curr)
+				0:num_t[3:0]<=num_t[3:0]<9?num_t[3:0]+1:0;
+				1:num_t[7:4]<=num_t[7:4]<9?num_t[7:4]+1:0;
+				2:num_t[11:8]<=num_t[11:8]<9?num_t[11:8]+1:0;
+				3:num_t[15:12]<=num_t[15:12]<9?num_t[15:12]+1:0;
+				4:num_t[19:16] <= num_t[19:16]==5?4'd0:4'd5;
+			endcase
+			as<=1;
+			end
+		else
+			num_t<=0;
 	end
 	else if(dec)
 	begin
-	if(state==1|state==2|state==3|state==4|state==5)
-		case(curr)
-			0:num[3:0]<=num[3:0]>0?num[3:0]-1:9;
-			1:num[7:4]<=num[7:4]>0?num[7:4]-1:9;
-			2:num[11:8]<=num[11:8]>0?num[11:8]-1:9;
-			3:num[15:12]<=num[15:12]>0?num[15:12]-1:9;
-			4:num[19:16] <= num[19:16]==5?4'd0:4'd5;
-		endcase
-	else
-		num<=num;
+		if(state==1)
+		begin
+			case(curr)
+				0:num[3:0]<=num[3:0]>0?num[3:0]-1:9;
+				1:num[7:4]<=num[7:4]>0?num[7:4]-1:9;
+				2:num[11:8]<=num[11:8]>0?num[11:8]-1:9;
+				3:num[15:12]<=num[15:12]>0?num[15:12]-1:9;
+				4:num[19:16] <= num[19:16]==5?4'd0:4'd5;
+			endcase
+			num_t<=0;
+		end
+		else if(state==2|state==3|state==4|state==5)
+			begin
+			case(curr)
+				0:num_t[3:0]<=num_t[3:0]>0?num_t[3:0]-1:9;
+				1:num_t[7:4]<=num_t[7:4]>0?num_t[7:4]-1:9;
+				2:num_t[11:8]<=num_t[11:8]>0?num_t[11:8]-1:9;
+				3:num_t[15:12]<=num_t[15:12]>0?num_t[15:12]-1:9;
+				4:num_t[19:16] <= num_t[19:16]==5?4'd0:4'd5;
+			endcase
+			as<=1;
+			end
+		else
+			num_t<=0;
+	end
+	else if(state==1&&as==1)
+	begin
+		num<=re_bcd;
+		as<=0;
+		num_t<=0;
+		curr<=0;
+		p<=0;
 	end
 
 always@(*)
 if(state==7)
+begin
 	nout<=test_n;
+end
+else if(state==2||state==3||state==4||state==5)
+begin
+	nout<=num_t;
+	num_tt<=num_t;
+end
 else
+begin
 	nout<=num;
+end
 
 n2bcd test(
 .n (-16'sd8888),

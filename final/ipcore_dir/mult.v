@@ -7,7 +7,7 @@
 // \   \   \/     Version: P.20131013
 //  \   \         Application: netgen
 //  /   /         Filename: mult.v
-// /___/   /\     Timestamp: Tue Nov 29 16:18:56 2016
+// /___/   /\     Timestamp: Fri Dec 02 00:01:28 2016
 // \   \  /  \ 
 //  \___\/\___\
 //             
@@ -34,10 +34,9 @@
 `timescale 1 ns/1 ps
 
 module mult (
-  clk, ce, p, a, b
+  clk, p, a, b
 )/* synthesis syn_black_box syn_noprune=1 */;
   input clk;
-  input ce;
   output [31 : 0] p;
   input [15 : 0] a;
   input [15 : 0] b;
@@ -77,281 +76,250 @@ module mult (
   wire \blk00000001/sig00000025 ;
   wire \blk00000001/sig00000024 ;
   wire \blk00000001/sig00000023 ;
-  wire \NLW_blk00000001/blk00000003_P<34>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_P<33>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_P<32>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_P<31>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<17>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<16>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<15>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<14>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<13>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<12>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<11>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<10>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<9>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<8>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<7>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<6>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<5>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<4>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<3>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<2>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<1>_UNCONNECTED ;
-  wire \NLW_blk00000001/blk00000003_BCOUT<0>_UNCONNECTED ;
-  FDE #(
+  wire \blk00000001/sig00000022 ;
+  wire \NLW_blk00000001/blk00000004_P<34>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_P<33>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_P<32>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_P<31>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<17>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<16>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<15>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<14>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<13>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<12>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<11>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<10>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<9>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<8>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<7>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<6>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<5>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<4>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<3>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<2>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<1>_UNCONNECTED ;
+  wire \NLW_blk00000001/blk00000004_BCOUT<0>_UNCONNECTED ;
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000023  (
+  \blk00000001/blk00000024  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000024 ),
     .Q(p[0])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000022  (
+  \blk00000001/blk00000023  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000002f ),
     .Q(p[1])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000021  (
+  \blk00000001/blk00000022  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000003a ),
     .Q(p[2])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000020  (
+  \blk00000001/blk00000021  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000003d ),
     .Q(p[3])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000001f  (
+  \blk00000001/blk00000020  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000003e ),
     .Q(p[4])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000001e  (
+  \blk00000001/blk0000001f  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000003f ),
     .Q(p[5])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000001d  (
+  \blk00000001/blk0000001e  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000040 ),
     .Q(p[6])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000001c  (
+  \blk00000001/blk0000001d  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000041 ),
     .Q(p[7])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000001b  (
+  \blk00000001/blk0000001c  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000042 ),
     .Q(p[8])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000001a  (
+  \blk00000001/blk0000001b  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000043 ),
     .Q(p[9])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000019  (
+  \blk00000001/blk0000001a  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000025 ),
     .Q(p[10])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000018  (
+  \blk00000001/blk00000019  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000026 ),
     .Q(p[11])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000017  (
+  \blk00000001/blk00000018  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000027 ),
     .Q(p[12])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000016  (
+  \blk00000001/blk00000017  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000028 ),
     .Q(p[13])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000015  (
+  \blk00000001/blk00000016  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000029 ),
     .Q(p[14])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000014  (
+  \blk00000001/blk00000015  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000002a ),
     .Q(p[15])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000013  (
+  \blk00000001/blk00000014  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000002b ),
     .Q(p[16])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000012  (
+  \blk00000001/blk00000013  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000002c ),
     .Q(p[17])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000011  (
+  \blk00000001/blk00000012  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000002d ),
     .Q(p[18])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000010  (
+  \blk00000001/blk00000011  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000002e ),
     .Q(p[19])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000000f  (
+  \blk00000001/blk00000010  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000030 ),
     .Q(p[20])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000000e  (
+  \blk00000001/blk0000000f  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000031 ),
     .Q(p[21])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000000d  (
+  \blk00000001/blk0000000e  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000032 ),
     .Q(p[22])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000000c  (
+  \blk00000001/blk0000000d  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000033 ),
     .Q(p[23])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000000b  (
+  \blk00000001/blk0000000c  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000034 ),
     .Q(p[24])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk0000000a  (
+  \blk00000001/blk0000000b  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000035 ),
     .Q(p[25])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000009  (
+  \blk00000001/blk0000000a  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000036 ),
     .Q(p[26])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000008  (
+  \blk00000001/blk00000009  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000037 ),
     .Q(p[27])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000007  (
+  \blk00000001/blk00000008  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000038 ),
     .Q(p[28])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000006  (
+  \blk00000001/blk00000007  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig00000039 ),
     .Q(p[29])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000005  (
+  \blk00000001/blk00000006  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000003b ),
     .Q(p[30])
   );
-  FDE #(
+  FD #(
     .INIT ( 1'b0 ))
-  \blk00000001/blk00000004  (
+  \blk00000001/blk00000005  (
     .C(clk),
-    .CE(ce),
     .D(\blk00000001/sig0000003c ),
     .Q(p[31])
   );
@@ -360,40 +328,43 @@ module mult (
     .BREG ( 0 ),
     .B_INPUT ( "DIRECT" ),
     .PREG ( 0 ))
-  \blk00000001/blk00000003  (
-    .CEA(ce),
-    .CEB(ce),
-    .CEP(ce),
+  \blk00000001/blk00000004  (
+    .CEA(\blk00000001/sig00000023 ),
+    .CEB(\blk00000001/sig00000023 ),
+    .CEP(\blk00000001/sig00000023 ),
     .CLK(clk),
-    .RSTA(\blk00000001/sig00000023 ),
-    .RSTB(\blk00000001/sig00000023 ),
-    .RSTP(\blk00000001/sig00000023 ),
+    .RSTA(\blk00000001/sig00000022 ),
+    .RSTB(\blk00000001/sig00000022 ),
+    .RSTP(\blk00000001/sig00000022 ),
     .A({a[15], a[15], a[15], a[14], a[13], a[12], a[11], a[10], a[9], a[8], a[7], a[6], a[5], a[4], a[3], a[2], a[1], a[0]}),
     .B({b[15], b[15], b[15], b[14], b[13], b[12], b[11], b[10], b[9], b[8], b[7], b[6], b[5], b[4], b[3], b[2], b[1], b[0]}),
-    .BCIN({\blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 , 
-\blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 , 
-\blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 , 
-\blk00000001/sig00000023 , \blk00000001/sig00000023 , \blk00000001/sig00000023 }),
-    .P({\blk00000001/sig0000003c , \NLW_blk00000001/blk00000003_P<34>_UNCONNECTED , \NLW_blk00000001/blk00000003_P<33>_UNCONNECTED , 
-\NLW_blk00000001/blk00000003_P<32>_UNCONNECTED , \NLW_blk00000001/blk00000003_P<31>_UNCONNECTED , \blk00000001/sig0000003b , \blk00000001/sig00000039 
+    .BCIN({\blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 , 
+\blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 , 
+\blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 , 
+\blk00000001/sig00000022 , \blk00000001/sig00000022 , \blk00000001/sig00000022 }),
+    .P({\blk00000001/sig0000003c , \NLW_blk00000001/blk00000004_P<34>_UNCONNECTED , \NLW_blk00000001/blk00000004_P<33>_UNCONNECTED , 
+\NLW_blk00000001/blk00000004_P<32>_UNCONNECTED , \NLW_blk00000001/blk00000004_P<31>_UNCONNECTED , \blk00000001/sig0000003b , \blk00000001/sig00000039 
 , \blk00000001/sig00000038 , \blk00000001/sig00000037 , \blk00000001/sig00000036 , \blk00000001/sig00000035 , \blk00000001/sig00000034 , 
 \blk00000001/sig00000033 , \blk00000001/sig00000032 , \blk00000001/sig00000031 , \blk00000001/sig00000030 , \blk00000001/sig0000002e , 
 \blk00000001/sig0000002d , \blk00000001/sig0000002c , \blk00000001/sig0000002b , \blk00000001/sig0000002a , \blk00000001/sig00000029 , 
 \blk00000001/sig00000028 , \blk00000001/sig00000027 , \blk00000001/sig00000026 , \blk00000001/sig00000025 , \blk00000001/sig00000043 , 
 \blk00000001/sig00000042 , \blk00000001/sig00000041 , \blk00000001/sig00000040 , \blk00000001/sig0000003f , \blk00000001/sig0000003e , 
 \blk00000001/sig0000003d , \blk00000001/sig0000003a , \blk00000001/sig0000002f , \blk00000001/sig00000024 }),
-    .BCOUT({\NLW_blk00000001/blk00000003_BCOUT<17>_UNCONNECTED , \NLW_blk00000001/blk00000003_BCOUT<16>_UNCONNECTED , 
-\NLW_blk00000001/blk00000003_BCOUT<15>_UNCONNECTED , \NLW_blk00000001/blk00000003_BCOUT<14>_UNCONNECTED , 
-\NLW_blk00000001/blk00000003_BCOUT<13>_UNCONNECTED , \NLW_blk00000001/blk00000003_BCOUT<12>_UNCONNECTED , 
-\NLW_blk00000001/blk00000003_BCOUT<11>_UNCONNECTED , \NLW_blk00000001/blk00000003_BCOUT<10>_UNCONNECTED , 
-\NLW_blk00000001/blk00000003_BCOUT<9>_UNCONNECTED , \NLW_blk00000001/blk00000003_BCOUT<8>_UNCONNECTED , 
-\NLW_blk00000001/blk00000003_BCOUT<7>_UNCONNECTED , \NLW_blk00000001/blk00000003_BCOUT<6>_UNCONNECTED , 
-\NLW_blk00000001/blk00000003_BCOUT<5>_UNCONNECTED , \NLW_blk00000001/blk00000003_BCOUT<4>_UNCONNECTED , 
-\NLW_blk00000001/blk00000003_BCOUT<3>_UNCONNECTED , \NLW_blk00000001/blk00000003_BCOUT<2>_UNCONNECTED , 
-\NLW_blk00000001/blk00000003_BCOUT<1>_UNCONNECTED , \NLW_blk00000001/blk00000003_BCOUT<0>_UNCONNECTED })
+    .BCOUT({\NLW_blk00000001/blk00000004_BCOUT<17>_UNCONNECTED , \NLW_blk00000001/blk00000004_BCOUT<16>_UNCONNECTED , 
+\NLW_blk00000001/blk00000004_BCOUT<15>_UNCONNECTED , \NLW_blk00000001/blk00000004_BCOUT<14>_UNCONNECTED , 
+\NLW_blk00000001/blk00000004_BCOUT<13>_UNCONNECTED , \NLW_blk00000001/blk00000004_BCOUT<12>_UNCONNECTED , 
+\NLW_blk00000001/blk00000004_BCOUT<11>_UNCONNECTED , \NLW_blk00000001/blk00000004_BCOUT<10>_UNCONNECTED , 
+\NLW_blk00000001/blk00000004_BCOUT<9>_UNCONNECTED , \NLW_blk00000001/blk00000004_BCOUT<8>_UNCONNECTED , 
+\NLW_blk00000001/blk00000004_BCOUT<7>_UNCONNECTED , \NLW_blk00000001/blk00000004_BCOUT<6>_UNCONNECTED , 
+\NLW_blk00000001/blk00000004_BCOUT<5>_UNCONNECTED , \NLW_blk00000001/blk00000004_BCOUT<4>_UNCONNECTED , 
+\NLW_blk00000001/blk00000004_BCOUT<3>_UNCONNECTED , \NLW_blk00000001/blk00000004_BCOUT<2>_UNCONNECTED , 
+\NLW_blk00000001/blk00000004_BCOUT<1>_UNCONNECTED , \NLW_blk00000001/blk00000004_BCOUT<0>_UNCONNECTED })
+  );
+  VCC   \blk00000001/blk00000003  (
+    .P(\blk00000001/sig00000023 )
   );
   GND   \blk00000001/blk00000002  (
-    .G(\blk00000001/sig00000023 )
+    .G(\blk00000001/sig00000022 )
   );
 
 // synthesis translate_on
