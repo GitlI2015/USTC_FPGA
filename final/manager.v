@@ -4,11 +4,12 @@ input clk,
 input [7:0] switch,
 input [3:0] button,
 output [7:0] led,
+output reg [2:0] rgb,
 output reg [19:0] disp
 );
 wire b1,b2,b3,b4;
 wire s1,s2,s3,s4,s5,s6,s7,s8;
-wire [2:0] curr;
+wire [2:0] curr,rgb_t;
 wire [19:0] num,hello_out,edit_out,help_out;
 wire p,error;
 reg er;
@@ -57,6 +58,7 @@ help hp(
 );
 hello h(
 .clk (clk),
+.rgb (rgb_t),
 .data (hello_out)
 );
 twinkle8 t(
@@ -67,22 +69,35 @@ twinkle8 t(
 
 always @(*)
 if(state == 0)
+begin
 	disp = hello_out;
+	rgb=rgb_t;
+end
 else if(error&&(state==1|state==2|state==3|state==4|state==5))
 	if(er==0)
 	begin
 		disp=error_out;
 		er=1;
+		rgb=3'b100;
 	end
 	else
 	if(s1)
+	begin
 		er=0;
+		rgb=3'b001;
+	end
 	else
 		disp=disp;
 else if(state==6||state>7)
+begin
 	disp = help_out;
+	rgb=3'b111;
+end
 else
+begin
 	disp = edit_out;
+	rgb=3'b001;
+end
 
 always@(posedge clk or posedge s8)
 if(s8)

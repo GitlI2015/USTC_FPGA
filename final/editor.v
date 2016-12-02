@@ -35,7 +35,7 @@ always@(posedge clk)
 		re<=mult_re;
 	else if(state==5)
 		re<=div_re;
-	else	if(error)
+	else if(error|rst)
 		re<=0;
 	else re<=re;
 initial
@@ -51,6 +51,7 @@ always@(posedge clk or posedge rst)
 		num<=0;
 		error<=0;
 		p<=0;
+		as<=0;
 	end
 	else if(left)
 	begin
@@ -136,8 +137,14 @@ always@(posedge clk or posedge rst)
 	end
 	else if(state==1&&as==1)
 		if(re>9999|re<-9999)
+		begin
 			error<=1;
-		else if(error!=1)
+			num_t<=0;
+			as<=0;
+			curr<=0;
+			p<=0;
+		end
+		else
 		begin
 			num<=re_bcd;
 			as<=0;

@@ -39,6 +39,10 @@ NET "led<4>"      LOC = "E17";   # Bank = 1, Pin name = IO, Type = I/O,         
 NET "led<5>"      LOC = "P15";   # Bank = 1, Pin name = IO, Type = I/O,                               Sch name = LD5? s3e500 only
 NET "led<6>"      LOC = "F4";    # Bank = 3, Pin name = IO, Type = I/O,                               Sch name = LD6? s3e500 only
 NET "led<7>"      LOC = "R4";    # Bank = 3, Pin name = IO/VREF_3, Type = VREF,                       Sch name = LD7? s3e500 only
+
+NET "rgb<0>" LOC = "L15";
+NET "rgb<1>" LOC = "K12";
+NET "rgb<2>" LOC = "L17";
 #Created by Constraints Editor (xc3s500e-fg320-5) - 2016/12/01
 NET "m/s/cl/c" TNM_NET = m/s/cl/c;
 NET "d/cl/c" TNM_NET = d/cl/c;

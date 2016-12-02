@@ -20,16 +20,20 @@
 //////////////////////////////////////////////////////////////////////////////////
 module hello(//»¶Ó­
 	input clk,
+	output reg [2:0] rgb=3'b001,
 	output [19:0]data
 );
 reg [69:0] txt = {5'd31,5'd31,5'd31,5'd31,5'd12,5'd10,5'd18,5'd12,5'd24,5'd18,5'd10,5'd23,5'd0,5'd22};	
+
 wire c;
 	
 converter cl(clk,24000000,c);
 always@(posedge clk)
 if(c)
+	begin
 	txt<=(txt[64:0]<<5)+txt[69:65];
-//	txt[69:65]<=c;
+	rgb<=rgb[2:1]+(rgb[0]<<2);
+	end
 else
 	txt<=txt;
 

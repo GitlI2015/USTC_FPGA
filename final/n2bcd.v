@@ -36,7 +36,7 @@ wire [15:0] f1,f2,f3;       //fractional
 
 always@(posedge clk)
 begin
-	bcd[19:16]<=n>0?4'd0:4'd5;
+	bcd[19:16]<=n>=0?4'd0:4'd5;
 	bcd[15:12]<=q1;
 	bcd[11:8]<=q2;
 	bcd[7:4] <=q3;
