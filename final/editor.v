@@ -17,7 +17,7 @@ reg as;
 reg [19:0] num;
 reg [19:0] num_t,num_tt;
 wire signed [15:0] lo,ro,mult_re,div_re;
-reg signed [15:0] re;
+reg signed [31:0] re;
 wire [19:0] test_n,re_bcd;
 wire r;
 wire signed [15:0] f;
@@ -28,34 +28,16 @@ mult mr(clk,mult_re,lo,ro);
 div dr(r,clk,lo,div_re,ro,f);
 always@(posedge clk)
 	if(state==2)
-	begin
 		re<=lo+ro;
-		if((lo+ro>9999)|(lo+ro<-9999))
-			error<=1;
-		else
-			error<=0;
-	end
 	else if(state==3)
-	begin
-		if((lo-ro>9999)|(lo+ro<-9999))
-			error<=1;
-		else
-			error<=0;
 		re<=lo-ro;
-	end
 	else if(state==4)
-	begin
 		re<=mult_re;
-		if((lo*ro>9999)|(lo*ro)<-999)
-			error<=1;
-		else
-			error<=0;
-	end
 	else if(state==5)
 		re<=div_re;
-	else if(rst)
-		error<=0;
-	else	re<=re;
+	else	if(error)
+		re<=0;
+	else re<=re;
 initial
 begin
 p=0;
@@ -67,6 +49,7 @@ always@(posedge clk or posedge rst)
 	begin
 		curr<=0;
 		num<=0;
+		error<=0;
 		p<=0;
 	end
 	else if(left)
@@ -152,13 +135,16 @@ always@(posedge clk or posedge rst)
 			num_t<=0;
 	end
 	else if(state==1&&as==1)
-	begin
-		num<=re_bcd;
-		as<=0;
-		num_t<=0;
-		curr<=0;
-		p<=0;
-	end
+		if(re>9999|re<-9999)
+			error<=1;
+		else if(error!=1)
+		begin
+			num<=re_bcd;
+			as<=0;
+			num_t<=0;
+			curr<=0;
+			p<=0;
+		end
 
 always@(*)
 if(state==7)
