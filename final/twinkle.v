@@ -33,7 +33,7 @@ module twinkle(
 	assign o=br>=cnt;
 endmodule
 
-module twinkle8(
+module LED(
 	input clk,
 	input [3:0] state,
 	output reg [7:0] out

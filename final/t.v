@@ -55,6 +55,41 @@ module t;
         
 		// Add stimulus here
 		switch[1]=1;
+		#100;
+		switch[1]=0;
+		#100;
+		button[3]=1;
+		#100;
+		button[3]=0;
+		#100;
+		button[3]=1;
+		#100;
+		button[3]=0;
+		#100
+		button[3]=1;
+		#100
+		button[3]=0;
+		#100
+		button[2]=1;
+		#100
+		button[2]=0;
+		#100
+		switch[3]=1;
+		#100
+		button[3]=1;
+		#100
+		button[3]=0;
+		#100
+		button[3]=1;
+		#100
+		button[3]=0;
+		#100
+		button[2]=1;
+		#100
+		button[2]=0;
+		#100
+		switch[3]=0;
+		
 	end
    always #1 clk=~clk;
 endmodule

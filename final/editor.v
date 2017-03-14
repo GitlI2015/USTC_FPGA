@@ -11,33 +11,34 @@ module editor(
 	output reg [2:0]curr=0,
 	output reg [19:0]nout=0,   //display on screen
 	output reg p,
-	output reg error
+	output reg error	 	//error sig
 );
 reg as;
-reg [19:0] num;
-reg [19:0] num_t,num_tt;
-wire signed [15:0] lo,ro,mult_re,div_re;
-reg signed [31:0] re;
+reg [19:0] num=0;
+reg [19:0] num_t=0,num_tt=0;
+wire signed [15:0] lo,ro,div_re;
+wire signed [31:0] mult_re;
+reg signed [31:0] result;
 wire [19:0] test_n,re_bcd;
 wire r;
 wire signed [15:0] f;
-bcd2n lb(num,1,clk,lo);
-bcd2n rb(num_tt,1,clk,ro);
-n2bcd reb(re,clk,re_bcd);
-mult mr(clk,mult_re,lo,ro);
-div dr(r,clk,lo,div_re,ro,f);
+bcd2n lb(num,1,clk,lo);				//parse bcd
+bcd2n rb(num_tt,1,clk,ro);			
+n2bcd reb(result,clk,re_bcd);			//translate result to bcd code
+mult mr(clk,mult_re,lo,ro);			//multiplier
+div dr(r,clk,lo,div_re,ro,f);		//divider
 always@(posedge clk)
 	if(state==2)
-		re<=lo+ro;
+		result<=lo+ro;
 	else if(state==3)
-		re<=lo-ro;
+		result<=lo-ro;
 	else if(state==4)
-		re<=mult_re;
+		result<=mult_re;
 	else if(state==5)
-		re<=div_re;
-	else if(error|rst)
-		re<=0;
-	else re<=re;
+		result<=div_re;
+	else if(error)
+		result<=0;
+	else result<=result;
 initial
 begin
 p=0;
@@ -136,7 +137,8 @@ always@(posedge clk or posedge rst)
 			num_t<=0;
 	end
 	else if(state==1&&as==1)
-		if(re>9999|re<-9999)
+	begin
+		if(result>9999|result<-9999)
 		begin
 			error<=1;
 			num_t<=0;
@@ -152,6 +154,9 @@ always@(posedge clk or posedge rst)
 			curr<=0;
 			p<=0;
 		end
+	end
+	else
+		error<=error;
 
 always@(*)
 if(state==7)

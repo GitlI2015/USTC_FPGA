@@ -34,12 +34,12 @@ begin
 		cnt<=cnt+1;
 	else
 		cnt<=0;
-	if(cnt>=500000)
+	if(cnt>=40000)
 	begin
 		out<=in;
 		cnt<=0;
 	end
-	if(cnt>=500000&&in)
+	if(cnt>=40000&&in)
 	begin
 		op<=1;
 	end
@@ -63,7 +63,7 @@ module debounce_switch(
 			cnt<=cnt+1;
 		else
 			cnt<=0;
-		if(cnt>=500000)
+		if(cnt>=40000)
 		begin
 			op<=in;
 			cnt<=0;

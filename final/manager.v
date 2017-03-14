@@ -61,7 +61,7 @@ hello h(
 .rgb (rgb_t),
 .data (hello_out)
 );
-twinkle8 t(
+LED l(
 .clk (clk),
 .state (state),
 .out (led)
@@ -70,33 +70,36 @@ twinkle8 t(
 always @(*)
 if(state == 0)
 begin
-	disp = hello_out;
-	rgb=rgb_t;
+	disp <= hello_out;
+	rgb<=rgb_t;
+end
+else if(s1)
+begin
+er<=0;
+rgb<=3'b001;
 end
 else if(error&&(state==1|state==2|state==3|state==4|state==5))
+begin
 	if(er==0)
 	begin
-		disp=error_out;
-		er=1;
-		rgb=3'b100;
+		disp<=error_out;
+		er<=1;
+		rgb<=3'b100;
 	end
 	else
-	if(s1)
-	begin
-		er=0;
-		rgb=3'b001;
-	end
-	else
-		disp=disp;
+		disp<=disp;
+end
 else if(state==6||state>7)
 begin
-	disp = help_out;
-	rgb=3'b111;
+	er<=0;
+	disp <= help_out;
+	rgb<=3'b111;
 end
 else
 begin
-	disp = edit_out;
-	rgb=3'b001;
+	er<=0;
+	disp <= edit_out;
+	rgb<=3'b001;
 end
 
 always@(posedge clk or posedge s8)
