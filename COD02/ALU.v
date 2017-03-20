@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    11:32:28 03/14/2017 
+// Create Date:    20:43:23 03/20/2017 
 // Design Name: 
 // Module Name:    ALU 
 // Project Name: 
@@ -18,7 +18,9 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
+
 module ALU(
+	 input clk,
     input signed [31:0] alu_a,
 	 input signed [31:0] alu_b,
 	 input 		  [4:0] 	alu_op,
@@ -36,7 +38,7 @@ initial
 alu_out = 0;
 
 
-always@(*)
+always@(posedge clk)
 case(alu_op)
 A_NOP:	alu_out <= alu_out;
 A_ADD: 	alu_out <= alu_a + alu_b;
