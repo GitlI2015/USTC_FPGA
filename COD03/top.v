@@ -7,7 +7,7 @@
 // Design Name: 
 // Module Name:    top 
 // Project Name: 
-// Target Devices: 
+// Target Devices: Z
 // Tool versions: 
 // Description: 
 //
@@ -23,13 +23,24 @@ module top(
 	input clk,
 	input rst_n
 );
-wire [4:0] addr1, addr2, addr3;
+wire [5:0] addr1, addr2, addr3;
 wire [31:0] data_out1, data_out2, result;
-wire write_enable;
+wire [31:0] doutb;
+wire clkb;
+wire wer,wea;
 
 
-Control c(clk, write_enable, addr1, addr2, addr3);
-REG_FILE r(clk, rst_n, addr1, addr2, addr3, result, write_enable, data_out1, data_out2);
+Control c(clk, wer, wea, addr1, addr2, addr3);
+REG_FILE r(clk, rst_n, addr1, addr2, addr3, doutb, wer, data_out1, data_out2);
 ALU a(data_out1, data_out2, 5'b1,result); 
 
+RAM ram(
+  .clka(clk), // input clka
+  .wea(wea), // input [0 : 0] wea
+  .addra(addr3), // input [5 : 0] addra
+  .dina(result), // input [31 : 0] dina
+  .clkb(clk), // input clkb
+  .addrb(addr3), // input [5 : 0] addrb
+  .doutb(doutb) // output [31 : 0] doutb
+);
 endmodule

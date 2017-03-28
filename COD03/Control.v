@@ -20,48 +20,50 @@
 //////////////////////////////////////////////////////////////////////////////////
 module Control(
 	input clk,
-	output reg we,
-	output reg [4:0] addr1,
-	output reg [4:0] addr2,
-	output reg [4:0] addr3
+	output reg wer,
+	output reg wea,
+	output reg [5:0] addr1,
+	output reg [5:0] addr2,
+	output reg [5:0] addr3
 );
 reg [1:0] state;
 
 initial 
 begin
-	we = 0;
+	wer = 0;
+	wea = 0;
 	state = 0;
 	addr1 = 0;
 	addr2 = 1;
-	addr3 = 1;
+	addr3 = 6'b111111;
 end
 
-always@(posedge clk)
-if(state == 2'd2)
-	state <= 0;
-else
-	state <= state + 1;
+
 
 always@(posedge clk)
 if(state == 2'd0)
 begin
-	we <= 0;
-	if(addr3 == 5'd31)
-		addr3 <= addr3;
+	wer <= 1;
+	if(addr3 == 5'd2)
+		state <= state + 1;
 	else
-		addr3 <= addr3+1;
+		addr3 <= addr3 + 1;
 end
 else if(state == 2'd1)
 begin
-	if(addr1 == 5'd29)
-		addr1 <= addr1;
-	else
-		addr1 <= addr1 + 1;
-	if(addr2 == 5'd30)
-		addr2 <= addr2;
-	else
-		addr2 <= addr2 + 1;
-	we <= 1;
+	wea <= 1;
+	wer <= 0;
+	state <= state+1;
+	addr3 <= addr3+1;
 end
+else if(state == 2'd2)
+begin
+	wea <= 0;
+	wer <= 1;
+	if(addr1 == 5'd29)
+		state <= state + 1;
+end
+else
+	state <= state;
 	
 endmodule
