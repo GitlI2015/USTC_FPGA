@@ -4,9 +4,9 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   13:35:45 03/28/2017
+// Create Date:   14:21:49 03/28/2017
 // Design Name:   top
-// Module Name:   D:/source/USTC_FPGA/COD03/test.v
+// Module Name:   F:/lab/COD03/test.v
 // Project Name:  COD03
 // Target Device:  
 // Tool versions:  

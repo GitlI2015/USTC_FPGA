@@ -23,7 +23,7 @@ reg [31:0] data[0:31];
 integer i;
 initial 
 begin
-for(i=0;i<64;i=i+1) data[i] = 32'h0;
+for(i=0;i<32;i=i+1) data[i] = 32'h0;
 r1_dout = 0;
 r2_dout = 0;
 end
@@ -32,14 +32,13 @@ always@(posedge clk or negedge rst_n)
 if(~rst_n)
 	data[r3_addr] <= 0; 
 else
+	begin
 	if(r3_wr)
 		data[r3_addr] <= r3_din;
-	else
-		begin
-			r1_dout <= data[r1_addr];
-			r2_dout <= data[r2_addr];
-		end
-	
+	r1_dout <= data[r1_addr];
+	r2_dout <= data[r2_addr];
+	end
+
 
 
 endmodule

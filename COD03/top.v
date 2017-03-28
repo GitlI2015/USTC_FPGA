@@ -7,7 +7,7 @@
 // Design Name: 
 // Module Name:    top 
 // Project Name: 
-// Target Devices: Z
+// Target Devices: 
 // Tool versions: 
 // Description: 
 //
@@ -26,12 +26,14 @@ module top(
 wire [5:0] addr1, addr2, addr3;
 wire [31:0] data_out1, data_out2, result;
 wire [31:0] doutb;
-wire clkb;
+wire [31:0] reg_in;
+wire src;
 wire wer,wea;
 
+assign reg_in = src ? doutb : result;
 
-Control c(clk, wer, wea, addr1, addr2, addr3);
-REG_FILE r(clk, rst_n, addr1, addr2, addr3, doutb, wer, data_out1, data_out2);
+Control c(clk, src,wer, wea, addr1, addr2, addr3);
+REG_FILE r(clk, rst_n, addr1, addr2, addr3, reg_in, wer, data_out1, data_out2);
 ALU a(data_out1, data_out2, 5'b1,result); 
 
 RAM ram(
